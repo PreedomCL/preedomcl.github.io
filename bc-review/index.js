@@ -28,6 +28,8 @@ let renderedBoxMath;
 let termBoxMath;
 let definitionBoxMath;
 
+let dataDownloaded = true;
+
 function onMathJaxLoad() {
     termBoxMath = MathJax.Hub.getAllJax(termBox)[0];
     definitionBoxMath = MathJax.Hub.getAllJax(definitionBox)[0];
@@ -48,20 +50,20 @@ function nextTerm() {
     renderUserInput();
 
     let nextIndex = -1;
-    for(let i = 0; i < terms.length; i++) {
+    for (let i = 0; i < terms.length; i++) {
         let attemptedIndex = Math.floor(Math.random() * terms.length);
-        if(validTerm(terms[attemptedIndex])) {
+        if (validTerm(terms[attemptedIndex])) {
             nextIndex = attemptedIndex;
             break;
         }
     }
 
-    if(nextIndex == -1) {
+    if (nextIndex == -1) {
         MathJax.Hub.Queue(["Text", termBoxMath, ""]);
         MathJax.Hub.Queue(["Text", definitionBoxMath, ""]);
         return;
     }
-        
+
     currentTerm = terms[nextIndex];
     console.log(currentTerm.term);
     MathJax.Hub.Queue(["Text", termBoxMath, currentTerm.term]);
@@ -69,15 +71,15 @@ function nextTerm() {
 }
 
 function validTerm(term) {
-    if(term.unit == "unit-circle" && !unitCircleCheckbox.checked)
+    if (term.unit == "unit-circle" && !unitCircleCheckbox.checked)
         return false;
-    if(term.unit == "derivatives" && !derivativesCheckbox.checked)
+    if (term.unit == "derivatives" && !derivativesCheckbox.checked)
         return false;
-    if(term.unit == "integrals" && !integralsCheckbox.checked)
+    if (term.unit == "integrals" && !integralsCheckbox.checked)
         return false;
-    if(term.unit == "series" && !seriesCheckbox.checked)
+    if (term.unit == "series" && !seriesCheckbox.checked)
         return false;
-    
+
     return true;
 }
 
@@ -88,10 +90,10 @@ function showAnswer() {
 
 function checkAnswer() {
     let input = inputBox.value;
-    if(input.length == 0)
+    if (input.length == 0)
         return;
 
-    if(input.replaceAll(" ", "") == currentTerm.definition.replaceAll(" ", "")) {
+    if (input.replaceAll(" ", "") == currentTerm.definition.replaceAll(" ", "")) {
         inputBox.style.color = "lime";
         MathJax.Hub.Queue(["Text", renderedBoxMath, "color(lime)(" + inputBox.value + ")"]);
         return;
@@ -100,11 +102,13 @@ function checkAnswer() {
 }
 
 function correct() {
+    dataDownloaded = false;
     currentTerm.correct++;
     nextTerm();
 }
 
 function incorrect() {
+    dataDownloaded = false;
     currentTerm.incorrect++;
     nextTerm();
 }
@@ -132,13 +136,14 @@ function loadData() {
         },
         false
     );
-        
+
     if (file) {
         reader.readAsText(file);
     }
 }
 
 function createFile() {
+    dataDownloaded = true;
     //create or obtain the file's content
     var content = JSON.stringify(terms);
 
@@ -156,3 +161,12 @@ function createFile() {
     a.click();
     window.URL.revokeObjectURL(url);
 }
+
+const beforeUnloadListener = (event) => {
+    if(dataDownloaded)
+        return;
+    event.preventDefault();
+    event.returnValue = '';
+}
+
+window.addEventListener("beforeunload", beforeUnloadListener, { capture: true });
