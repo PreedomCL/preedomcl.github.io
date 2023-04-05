@@ -63,7 +63,7 @@ function nextTerm() {
     }
         
     currentTerm = terms[nextIndex];
-
+    console.log(currentTerm.term);
     MathJax.Hub.Queue(["Text", termBoxMath, currentTerm.term]);
     MathJax.Hub.Queue(["Text", definitionBoxMath, ""]);
 }
