@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./terms.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript">
+        window.MathJax = {
+            "fast-preview": {
+       			disabled: true
+			},
+            AuthorInit: function () {
+                MathJax.Hub.Register.StartupHook("End", function () {
+                    MathJax.Hub.processSectionDelay = 0;
+                    onMathJaxLoad();
+                });
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>
+    <style>
+        .ioArea {
+            font-size: 0.9em;
+            width: 100%;
+            height: 5em;
+            border-radius: 4px;
+            border: 1px solid rgb(200, 200, 200);
+            display: inline-block;
+            white-space: nowrap;
+            padding: 1em 1em;
+            vertical-align: top;
+            resize: none;
+        }
+
+        .column {
+            width: 60%;
+        }
+
+        button {
+            width: 20%;
+        }
+        #fileChooser {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="column">
+        <label for="term-box">Term:</label>
+        <br>
+        <div class="ioArea" id="term-box">
+            ` `
+        </div>
+        <label for="definition-box">Definition:</label>
+        <br>
+        <div class="ioArea" id="definition-box">
+            ` `
+        </div>
+        <label for="input-box">Your Answer:</label>
+        <br>
+        <textarea class="ioArea" id="input-box"></textarea>
+        <br>
+        <div class="ioArea" id="rendered-box">
+            ` `
+        </div>
+        <button id="show-answer-button">Show Answer</button>
+        <button id="correct-button">Correct</button>
+        <button id="incorrect-button">Incorrect</button>
+        <button id="skip-button">Next</button>
+    </div>
+    <div>
+        <button id="download-button">Download Your Data</button>
+        <button id="upload-button">Load You Data</button>
+        <input type="file" id="fileChooser"/>
+
+        <label for="unit-circle-checkbox">Unit Circle</label>
+        <input type="checkbox" id="unit-circle-checkbox" checked>
+        <label for="derivatives-checkbox">Derivatives</label>
+        <input type="checkbox" id="derivatives-checkbox" checked>
+        <label for="integrals-checkbox">Integrals</label>
+        <input type="checkbox" id="integrals-checkbox" checked>
+        <label for="series-checkbox">Series</label>
+        <input type="checkbox" id="series-checkbox" checked>
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
