@@ -931,64 +931,141 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "sin(x) \" as a power series\"",
-        definition: "x - (x^3)/(3!) + (x^5)/(5!) - ... + ((-1)^n(x^(2n+1))) / ((2n + 1)!)",
+        term: "1/x \" as a power series\"",
+        definition: "1 - (x-1) + (x-1)^2-...+(-1)^n (x-1)^n",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "x - (x^3)/(3!) + (x^5)/(5!) - ... + ((-1)^n(x^(2n+1))) / ((2n + 1)!)",
-        definition: "sin(x)",
+        term: "1/(1-x) \" as a power series\"",
+        definition: "1 + x + x^2 + ... + x^n",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "cos(x) \" as a power series\"",
-        definition: "1 - (x^2)/(2!) + (x^4)/(4!) - ... + ((-1)^n(x^(2n))) / ((2n)!)",
+        term: "1/(1+x) \" as a power series\"",
+        definition: "1 - x + x^2 - ... + (-1)^n x^n",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "1 - (x^2)/(2!) + (x^4)/(4!) - ... + ((-1)^n(x^(2n))) / ((2n)!)",
-        definition: "cos(x)",
+        term: "ln x \" as a power series\"",
+        definition: "(x-1)-(x-1)^2/2+(x-1)^3/3 - ... + ((-1)^(n-1)(x-1)^n)/n",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
         term: "e^x \" as a power series\"",
-        definition: "1 + x + (x^2)/(2!) + (x^3)/(3!) + ... + (x^n) / (n!)",
+        definition: "1 + x + x^2/(2!) + ... + x^n/n!",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "1 + x + (x^2)/(2!) + (x^3)/(3!) + ... + (x^n) / (n!)",
+        term: "sin x \" as a power series\"",
+        definition: "x - x^3/(3!) + x^5/(5!) - ... + ((-1)^nx^(2n+1))/((2n+1)!)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "cos x \" as a power series\"",
+        definition: "1-x^2/(2!)+x^4/(4!) - ... + ((-1)^nx^(2n))/((2n)!)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "arctan x \" as a power series\"",
+        definition: "x-x^3/3+x^5/5 - ... + ((-1)^nx^(2n+1))/(2n+1)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "arcsin x \" as a power series\"",
+        definition: "x + x^3/(2*3)+(1*3x^5)/(2*4*5)+...+((2n)!x^(2n+1))/((2^n n!)^2(2n_1))",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "(1 + x)^k \" as a power series\"",
+        definition: "1 + kx + (k(k-1)x^2)/2! + ... + (k(k-1)...(k-n+1)x^n)/(n!)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "1 - (x-1) + (x-1)^2-...+(-1)^n (x-1)^n",
+        definition: "1/x",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "1 + x + x^2 + ... + x^n",
+        definition: "1/(1-x)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "1 - x + x^2 - ... + (-1)^n x^n",
+        definition: "1/(1+x)",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "(x-1)-(x-1)^2/2+(x-1)^3/3 - ... + ((-1)^(n-1)(x-1)^n)/n",
+        definition: "ln x",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "1 + x + x^2/(2!) + ... + x^n/n!",
         definition: "e^x",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "1 / (1 - x)",
-        definition: "",
+        term: "x - x^3/(3!) + x^5/(5!) - ... + ((-1)^nx^(2n+1))/((2n+1)!)",
+        definition: "sin x",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "",
-        definition: "",
+        term: "1-x^2/(2!)+x^4/(4!) - ... + ((-1)^nx^(2n))/((2n)!)",
+        definition: "cos x",
         unit: "series",
         correct: 0,
         incorrect: 0
     },
     {
-        term: "ln(",
-        definition: "",
+        term: "x-x^3/3+x^5/5 - ... + ((-1)^nx^(2n+1))/(2n+1)",
+        definition: "arctan x",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "x + x^3/(2*3)+(1*3x^5)/(2*4*5)+...+((2n)!x^(2n+1))/((2^n n!)^2(2n_1))",
+        definition: "arcsin x",
+        unit: "series",
+        correct: 0,
+        incorrect: 0
+    },
+    {
+        term: "1 + kx + (k(k-1)x^2)/2! + ... + (k(k-1)...(k-n+1)x^n)/(n!)",
+        definition: "(1 + x)^k",
         unit: "series",
         correct: 0,
         incorrect: 0
