@@ -56,7 +56,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "sin(pi))",
+        term: "sin(pi)",
         definition: "0",
         unit: "unit-circle",
         correct: 0,
@@ -168,7 +168,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "cos(pi))",
+        term: "cos(pi)",
         definition: "-1",
         unit: "unit-circle",
         correct: 0,
@@ -280,7 +280,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "tan(pi))",
+        term: "tan(pi)",
         definition: "0",
         unit: "unit-circle",
         correct: 0,
@@ -392,7 +392,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "sec(pi))",
+        term: "sec(pi)",
         definition: "-1",
         unit: "unit-circle",
         correct: 0,
@@ -504,7 +504,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "csc(pi))",
+        term: "csc(pi)",
         definition: "UNDEF",
         unit: "unit-circle",
         correct: 0,
@@ -616,7 +616,7 @@ let terms = [
         incorrect: 0
     },
     {
-        term: "cot(pi))",
+        term: "cot(pi)",
         definition: "UNDEF",
         unit: "unit-circle",
         correct: 0,

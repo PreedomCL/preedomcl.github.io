@@ -69,7 +69,7 @@ function nextTerm() {
 }
 
 function validTerm(term) {
-    if(term.unit == "unit circle" && !unitCircleCheckbox.checked)
+    if(term.unit == "unit-circle" && !unitCircleCheckbox.checked)
         return false;
     if(term.unit == "derivatives" && !derivativesCheckbox.checked)
         return false;
