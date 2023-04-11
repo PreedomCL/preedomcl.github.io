@@ -49,9 +49,11 @@ function nextTerm() {
     inputBox.value = "";
     renderUserInput();
 
+    insertionSort(terms);
+
     let nextIndex = -1;
     for (let i = 0; i < terms.length; i++) {
-        let attemptedIndex = Math.floor(Math.random() * terms.length);
+        let attemptedIndex = Math.floor(distributionFunc(Math.random()) * terms.length);
         if (validTerm(terms[attemptedIndex])) {
             nextIndex = attemptedIndex;
             break;
@@ -69,6 +71,31 @@ function nextTerm() {
     MathJax.Hub.Queue(["Text", termBoxMath, currentTerm.term]);
     MathJax.Hub.Queue(["Text", definitionBoxMath, ""]);
 }
+
+function distributionFunc(num) {
+    return 0.5*num*num*num + 0.5*num;
+}
+
+function insertionSort(arr) { 
+    let i, key, j;
+    let n = arr.length;
+    for (i = 1; i < n; i++)
+    { 
+        key = arr[i];
+        keyScore = key.correct * 2 + key.incorrect;
+        j = i - 1; 
+   
+        /* Move elements of arr[0..i-1], that are 
+        greater than key, to one position ahead 
+        of their current position */
+        while (j >= 0 && (arr[j].correct * 2 + arr[j].incorrect) > keyScore)
+        {
+            arr[j + 1] = arr[j]; 
+            j = j - 1; 
+        }
+        arr[j + 1] = key; 
+    } 
+} 
 
 function validTerm(term) {
     if (term.unit == "unit-circle" && !unitCircleCheckbox.checked)
@@ -94,8 +121,8 @@ function checkAnswer() {
         return;
 
     if (input.replaceAll(" ", "") == currentTerm.definition.replaceAll(" ", "")) {
-        inputBox.style.color = "lime";
-        MathJax.Hub.Queue(["Text", renderedBoxMath, "color(lime)(" + inputBox.value + ")"]);
+        inputBox.style.color = "darkgreen";
+        MathJax.Hub.Queue(["Text", renderedBoxMath, "color(darkgreen)(" + inputBox.value + ")"]);
         return;
     }
     MathJax.Hub.Queue(["Text", renderedBoxMath, "color(red)(" + inputBox.value + ")"]);
@@ -125,8 +152,8 @@ function loadData() {
             for (let i = 0; i < terms.length; i++) {
                 for (let j = 0; j < userData.length; j++) {
                     if (terms[i].term == userData[j].term) {
-                        terms[i].correct = userData[j].correct;
-                        terms[i].incorrect = userData[j].incorrect;
+                        terms[i].correct += userData[j].correct;
+                        terms[i].incorrect += userData[j].incorrect;
                         break;
                     }
                 }
