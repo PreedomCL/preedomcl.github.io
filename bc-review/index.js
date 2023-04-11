@@ -28,6 +28,8 @@ let renderedBoxMath;
 let termBoxMath;
 let definitionBoxMath;
 
+let currentTerm;
+
 let dataDownloaded = true;
 
 function onMathJaxLoad() {
@@ -45,29 +47,24 @@ function renderUserInput() {
 }
 
 function nextTerm() {
-    inputBox.style.color = "black";
+    renderedBox.parentElement.style.background = "";
     inputBox.value = "";
     renderUserInput();
 
     insertionSort(terms);
-
-    let nextIndex = -1;
-    for (let i = 0; i < terms.length; i++) {
-        let attemptedIndex = Math.floor(distributionFunc(Math.random()) * terms.length);
-        if (validTerm(terms[attemptedIndex])) {
-            nextIndex = attemptedIndex;
-            break;
-        }
-    }
-
-    if (nextIndex == -1) {
-        MathJax.Hub.Queue(["Text", termBoxMath, ""]);
+    
+    if(!(unitCircleCheckbox.checked || derivativesCheckbox.checked || integralsCheckbox.checked || seriesCheckbox.checked)) {
+        MathJax.Hub.Queue(["Text", termBoxMath, "\"No Units Selected\""]);
         MathJax.Hub.Queue(["Text", definitionBoxMath, ""]);
         return;
     }
+    
+    let nextIndex = 0;
+    do {
+        nextIndex = Math.floor(distributionFunc(Math.random()) * terms.length);
+    } while (!validTerm(terms[nextIndex]) || terms[nextIndex] == currentTerm)
 
     currentTerm = terms[nextIndex];
-    console.log(currentTerm.term);
     MathJax.Hub.Queue(["Text", termBoxMath, currentTerm.term]);
     MathJax.Hub.Queue(["Text", definitionBoxMath, ""]);
 }
@@ -121,8 +118,8 @@ function checkAnswer() {
         return;
 
     if (input.replaceAll(" ", "") == currentTerm.definition.replaceAll(" ", "")) {
-        inputBox.style.color = "darkgreen";
-        MathJax.Hub.Queue(["Text", renderedBoxMath, "color(darkgreen)(" + inputBox.value + ")"]);
+        MathJax.Hub.Queue(["Text", renderedBoxMath, "color(lightgreen)(" + inputBox.value + ")"]);
+        renderedBox.parentElement.style.background = "forestgreen";
         return;
     }
     MathJax.Hub.Queue(["Text", renderedBoxMath, "color(red)(" + inputBox.value + ")"]);
